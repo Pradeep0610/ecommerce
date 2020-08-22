@@ -1,17 +1,26 @@
 <template>
   <b-container>
     <h1>All Products</h1>
+
     <b-row>
       <b-col class="pb-2">
-        <b-button pill class="pb-2" href="#">Add a new product</b-button>
+        <b-button
+          pill
+          class="pb-2"
+          @click="$bvModal.show('add-product-modal')"
+          variant="dark"
+        >Add a new product</b-button>
       </b-col>
       <b-col class="pb-2">
-        <b-button pill class="pb-2" href="#">Add a new owner</b-button>
+        <b-button pill class="pb-2" href="#" variant="dark">Add a new owner</b-button>
       </b-col>
       <b-col class="pb-2">
-        <b-button pill class="pb-2" href="#">Add a new category</b-button>
+        <b-button pill class="pb-2" href="#" variant="dark">Add a new category</b-button>
       </b-col>
     </b-row>
+
+    <AddProduct></AddProduct>
+
     <div class="mt-4">
       <b-row>
         <b-col xl="2" lg="2" md="3" sm="6" v-for="product in products" :key="product._id">
@@ -46,12 +55,16 @@
 <script>
 // @ is an alias to /src
 import axios from "axios";
+import AddProduct from "../components/AddNewProductModal";
 export default {
   name: "Product",
   data() {
     return {
       products: []
     };
+  },
+  components: {
+    AddProduct
   },
   mounted() {
     axios
