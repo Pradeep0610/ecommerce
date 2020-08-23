@@ -76,8 +76,9 @@
           </b-form-group>
         </validation-provider>
 
+        <!--TODO validate file -->
         <!-- Photo file -->
-        <validation-provider name="Photo" rules="required" v-slot="{ valid, errors }">
+        <validation-provider name="Photo" rules="required|image" v-slot="{ valid, errors }">
           <b-form-group label="Photo" label-for="photo-input" invalid-feedback="Photo is required">
             <b-form-file
               placeholder="Choose a file or drop it here..."
@@ -95,8 +96,18 @@
   </b-modal>
 </template>
 <script>
+import axios from "axios";
 import { ValidationProvider, ValidationObserver, extend } from "vee-validate";
 extend("required", {
+  validate(value) {
+    return {
+      required: true,
+      valid: ["", null, undefined].indexOf(value) === -1
+    };
+  },
+  computesRequired: true
+});
+extend("image", {
   validate(value) {
     return {
       required: true,
@@ -114,24 +125,13 @@ export default {
       title: "",
       price: "",
       description: "",
-      photo: [],
-      categoryOptions: [
-        { value: null, text: "Please select an option" },
-        { value: "1", text: "category-1" },
-        { value: "2", text: "category-2" },
-        { value: "3", text: "category-3" }
-      ],
-      ownerOptions: [
-        { value: null, text: "Please select an option" },
-        { value: "1", text: "owner-1" },
-        { value: "2", text: "owner-2" },
-        { value: "3", text: "owner-3" }
-      ]
+      photo: null,
+      categoryOptions: [],
+      ownerOptions: []
     };
   },
   methods: {
     onSubmit() {
-      alert("Form has been submitted!");
       this.closeModal();
     },
     resetModal() {
@@ -151,6 +151,25 @@ export default {
   components: {
     ValidationProvider,
     ValidationObserver
+  },
+  mounted() {
+    axios
+      .get("http://localhost:3000/api/categories")
+      .then(response => {
+        this.categoryOptions = response.data.categories;
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
+
+    axios
+      .get("http://localhost:3000/api/owners")
+      .then(response => {
+        this.ownerOptions = response.data.owners;
+      })
+      .catch(err => {
+        console.log(err.message);
+      });
   }
 };
 </script>

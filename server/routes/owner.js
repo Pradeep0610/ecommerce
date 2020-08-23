@@ -28,10 +28,10 @@ router.post('/owners', upload.single('photo'), async (req, res) => {
 //GET request--Get all owner
 router.get('/owners', async (req, res) => {
     try {
-        let owner = await Owner.find()
+        let owners = await Owner.find()
         res.json({
             success: true,
-            owner: owner
+            owners: owners
         })
     } catch (err) {
         res.status(500).json({
