@@ -17,7 +17,7 @@
             invalid-feedback="Category is required"
           >
             <b-form-select
-              v-model="category"
+              v-model="categoryID"
               :state="errors[0] ? false : (valid ? true : null)"
               :options="categoryOptions"
               id="category-input"
@@ -29,7 +29,7 @@
         <validation-provider name="Owner" rules="required" v-slot="{ valid, errors }">
           <b-form-group label="Owner" label-for="owner-input" invalid-feedback="Owner is required">
             <b-form-select
-              v-model="owner"
+              v-model="ownerID"
               :state="errors[0] ? false : (valid ? true : null)"
               :options="ownerOptions"
               id="owner-input"
@@ -59,6 +59,21 @@
           </b-form-group>
         </validation-provider>
 
+        <!-- StockQuantity input -->
+        <validation-provider name="StockQuantity" rules="required" v-slot="{ valid, errors }">
+          <b-form-group
+            label="Stock quantity"
+            label-for="stock-input"
+            invalid-feedback="Stock quantity is required"
+          >
+            <b-form-input
+              id="stock-input"
+              :state="errors[0] ? false : (valid ? true : null)"
+              v-model="stockQuantity"
+            ></b-form-input>
+          </b-form-group>
+        </validation-provider>
+
         <!-- Description textarea -->
         <validation-provider name="Description" rules="required" v-slot="{ valid, errors }">
           <b-form-group
@@ -76,15 +91,15 @@
           </b-form-group>
         </validation-provider>
 
-        <!--TODO validate file -->
         <!-- Photo file -->
-        <validation-provider name="Photo" rules="required|image" v-slot="{ valid, errors }">
+        <validation-provider name="Photo" rules="required|image" v-slot="{ validate, errors }">
           <b-form-group label="Photo" label-for="photo-input" invalid-feedback="Photo is required">
             <b-form-file
               placeholder="Choose a file or drop it here..."
               drop-placeholder="Drop file here..."
-              :state="errors[0] ? false : (valid ? true : null)"
-              v-model="photo"
+              :state="errors[0] ? false : (validate ? true : null)"
+              @input="validate"
+              v-model="selectedFile"
             ></b-form-file>
           </b-form-group>
         </validation-provider>
@@ -118,39 +133,62 @@ extend("image", {
 });
 export default {
   name: "AddProduct",
+  components: {
+    ValidationProvider,
+    ValidationObserver
+  },
   data() {
     return {
-      category: null,
-      owner: null,
+      categoryID: null,
+      ownerID: null,
       title: "",
       price: "",
+      stockQuantity: "",
       description: "",
-      photo: null,
+      selectedFile: null,
       categoryOptions: [],
-      ownerOptions: []
+      ownerOptions: [],
+      fileName: ""
     };
   },
   methods: {
     onSubmit() {
+      let data = new FormData();
+      console.log(data);
+      data.append("title", this.title);
+      data.append("price", this.price);
+      data.append("stockQuantity", this.stockQuantity);
+      data.append("description", this.description);
+      data.append("categoryID", this.categoryID);
+      data.append("ownerID", this.ownerID);
+      data.append("photo", this.selectedFile, this.selectedFile.name);
+
+      axios
+        .post("http://localhost:3000/api/products", data)
+        .then(response => {
+          console.log(response);
+        })
+        .catch(err => {
+          console.log(err.message);
+        });
       this.closeModal();
     },
     resetModal() {
-      this.category = null;
-      this.owner = null;
+      this.categoryID = null;
+      this.ownerID = null;
       this.title = "";
       this.price = "";
+      this.stockQuantity = "";
       this.description = "";
       this.photo = [];
+      this.selectedFile = null;
+      this.fileName = "";
     },
     closeModal() {
       this.$nextTick(() => {
         this.$bvModal.hide("add-product-modal");
       });
     }
-  },
-  components: {
-    ValidationProvider,
-    ValidationObserver
   },
   mounted() {
     axios

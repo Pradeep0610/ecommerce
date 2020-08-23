@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const ProductSchema = new Schema({
-    category: { type: Schema.Types.ObjectId, ref: 'Category' },
-    own: { type: Schema.Types.ObjectId, ref: 'Owner' },
+    categoryID: { type: Schema.Types.ObjectId, ref: 'Category' },
+    ownerID: { type: Schema.Types.ObjectId, ref: 'Owner' },
     title: String,
     description: String,
     photo: String,
