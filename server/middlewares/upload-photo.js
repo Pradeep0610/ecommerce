@@ -27,10 +27,10 @@ const multerS3 = require('multer-s3')
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'photos/')
+        cb(null, 'assets/')
     },
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now().toString())
+        cb(null, new Date().toISOString() + file.originalname)
     }
 })
 

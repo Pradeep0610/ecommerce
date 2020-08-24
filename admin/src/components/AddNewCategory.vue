@@ -45,9 +45,8 @@ export default {
     methods: {
         onSubmit() {
             let data = {
-                type: this.type
+                text: this.type
             };
-            console.log(data);
 
             axios
                 .post("http://localhost:3000/api/categories", data)

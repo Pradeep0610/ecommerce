@@ -24,12 +24,16 @@ router.post('/products', upload.single('photo'), async (req, res) => {
 
         res.json({
             status: true,
-            message: "Successfully saved"
+            message: "Successfully saved",
+            data: req.body,
+            file: req.file
         })
     } catch (err) {
         res.status(500).json({
             success: false,
-            message: err.message
+            message: err.message,
+            request: req.body,
+            file: req.file
         })
     }
 })

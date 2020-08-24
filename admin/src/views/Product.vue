@@ -1,7 +1,6 @@
 <template>
 <b-container>
     <h1>All Products</h1>
-
     <b-row>
         <b-col class="pb-2">
             <b-button pill class="pb-2" @click="$bvModal.show('add-product-modal')" variant="dark">Add a new product</b-button>
@@ -21,7 +20,7 @@
         <b-row>
             <b-col xl="2" lg="2" md="3" sm="6" v-for="product in products" :key="product._id">
                 <div>
-                    <b-img :src="product.photo" fluid rounded></b-img>
+                    <b-img :src="'http://localhost:3000/'+product.photo" fluid rounded></b-img>
                 </div>
                 <div>
                     <span class="font-weight-bold">{{ product.title }}</span>
@@ -49,7 +48,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import axios from "axios";
 import AddProduct from "../components/AddNewProductModal";
 import AddCategory from "../components/AddNewCategory";
