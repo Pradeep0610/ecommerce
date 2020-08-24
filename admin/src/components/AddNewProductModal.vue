@@ -1,5 +1,5 @@
 <template>
-<b-modal id="add-product-modal" ref="modal" title="Add a new product" @show="resetModal" @hidden="resetModal" hide-footer>
+<b-modal id="add-product-modal" ref="modal" title="Add a new product" @show="resetModal" @hide="resetModal" hide-footer>
     <ValidationObserver v-slot="{ handleSubmit }">
         <b-form ref="form" @submit.prevent="handleSubmit(onSubmit)">
             <!-- Category Dropdown -->
@@ -109,8 +109,7 @@ export default {
             ownerOptions: [{
                 name: "Select an option",
                 _id: null
-            }],
-            fileName: ""
+            }]
         };
     },
     methods: {
@@ -142,7 +141,6 @@ export default {
             this.description = "";
             this.photo = [];
             this.selectedFile = null;
-            this.fileName = "";
         },
         closeModal() {
             this.$nextTick(() => {

@@ -9,12 +9,13 @@
             <b-button pill class="pb-2" @click="$bvModal.show('add-category-modal')" variant="dark">Add a new category</b-button>
         </b-col>
         <b-col class="pb-2">
-            <b-button pill class="pb-2" href="#" variant="dark">Add a new owner</b-button>
+            <b-button pill class="pb-2" @click="$bvModal.show('add-owner-modal')" variant="dark">Add a new owner</b-button>
         </b-col>
     </b-row>
 
     <AddProduct></AddProduct>
     <AddCategory></AddCategory>
+    <AddOwner></AddOwner>
 
     <div class="mt-4">
         <b-row>
@@ -51,6 +52,7 @@
 import axios from "axios";
 import AddProduct from "../components/AddNewProductModal";
 import AddCategory from "../components/AddNewCategory";
+import AddOwner from "../components/AddNewOwnerModal";
 export default {
     name: "Product",
     data() {
@@ -60,7 +62,8 @@ export default {
     },
     components: {
         AddProduct,
-        AddCategory
+        AddCategory,
+        AddOwner
     },
     mounted() {
         axios
