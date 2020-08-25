@@ -1,10 +1,10 @@
 <template>
-<b-modal id="update-product-modal" ref="modal" :title="title" @show="resetModal" @hide="resetModal" hide-footer>
+<b-jumbotron>
     <ValidationObserver v-slot="{ handleSubmit }">
         <b-form ref="form" @submit.prevent="handleSubmit(onSubmit)">
             <!-- Category Dropdown -->
             <validation-provider name="Category" rules="required" v-slot="{ valid, errors }">
-                <b-form-group label="Category" label-for="category-input" invalid-feedback="Category is required">
+                <b-form-group label="Category" label-for="category-input" invalid-feedback="Category is required" label-cols-sm="4" label-cols-lg="4">
                     <b-form-select v-model="categoryID" :state="errors[0] ? false : (valid ? true : null)" id="category-input">
                         <b-form-select-option v-for="category in categoryOptions" :key="category._id" :value="category._id">{{ category.text }}</b-form-select-option>
                     </b-form-select>
@@ -13,7 +13,7 @@
 
             <!-- Owner Dropdown -->
             <validation-provider name="Owner" rules="required" v-slot="{ valid, errors }">
-                <b-form-group label="Owner" label-for="owner-input" invalid-feedback="Owner is required">
+                <b-form-group label="Owner" label-for="owner-input" invalid-feedback="Owner is required" label-cols-sm="4" label-cols-lg="4">
                     <b-form-select v-model="ownerID" :state="errors[0] ? false : (valid ? true : null)" id="owner-input">
                         <b-form-select-option v-for="owner in ownerOptions" :key="owner._id" :value="owner._id">{{ owner.name }}</b-form-select-option>
                     </b-form-select>
@@ -22,44 +22,44 @@
 
             <!-- Title input -->
             <validation-provider name="Title" rules="required" v-slot="{ valid, errors }">
-                <b-form-group label="Title" label-for="title-input" invalid-feedback="Title is required">
-                    <b-form-input id="title-input" :state="errors[0] ? false : (valid ? true : null)" v-model="productTitle" :placeholder="productInfo.title"></b-form-input>
+                <b-form-group label="Title" label-for="title-input" invalid-feedback="Title is required" label-cols-sm="4" label-cols-lg="4">
+                    <b-form-input id="title-input" :state="errors[0] ? false : (valid ? true : null)" v-model="productTitle"></b-form-input>
                 </b-form-group>
             </validation-provider>
 
             <!-- Price input -->
             <validation-provider name="Price" rules="required" v-slot="{ valid, errors }">
-                <b-form-group label="Price" label-for="price-input" invalid-feedback="Price is required">
-                    <b-form-input id="price-input" :state="errors[0] ? false : (valid ? true : null)" v-model="price" :placeholder="productInfo.price"></b-form-input>
+                <b-form-group label="Price" label-for="price-input" invalid-feedback="Price is required" label-cols-sm="4" label-cols-lg="4">
+                    <b-form-input id="price-input" :state="errors[0] ? false : (valid ? true : null)" v-model="price"></b-form-input>
                 </b-form-group>
             </validation-provider>
 
             <!-- StockQuantity input -->
             <validation-provider name="StockQuantity" rules="required" v-slot="{ valid, errors }">
-                <b-form-group label="Stock quantity" label-for="stock-input" invalid-feedback="Stock quantity is required">
-                    <b-form-input id="stock-input" :state="errors[0] ? false : (valid ? true : null)" v-model="stockQuantity" :placeholder="productInfo.stockQuantity"></b-form-input>
+                <b-form-group label="Stock quantity" label-for="stock-input" invalid-feedback="Stock quantity is required" label-cols-sm="4" label-cols-lg="4">
+                    <b-form-input id="stock-input" :state="errors[0] ? false : (valid ? true : null)" v-model="stockQuantity"></b-form-input>
                 </b-form-group>
             </validation-provider>
 
             <!-- Description textarea -->
             <validation-provider name="Description" rules="required" v-slot="{ valid, errors }">
-                <b-form-group label="Description" label-for="description-input" invalid-feedback="Description is required">
-                    <b-form-textarea id="description-input" size="default" :placeholder="productInfo.description" :state="errors[0] ? false : (valid ? true : null)" v-model="description"></b-form-textarea>
+                <b-form-group label="Description" label-for="description-input" invalid-feedback="Description is required" label-cols-sm="4" label-cols-lg="4">
+                    <b-form-textarea id="description-input" size="default" :state="errors[0] ? false : (valid ? true : null)" v-model="description"></b-form-textarea>
                 </b-form-group>
             </validation-provider>
 
             <!-- Photo file -->
             <validation-provider name="Photo" rules="required|image" v-slot="{ validate, errors }">
-                <b-form-group label="Photo" label-for="photo-input" invalid-feedback="Photo is required">
+                <b-form-group label="Photo" label-for="photo-input" invalid-feedback="Photo is required" label-cols-sm="4" label-cols-lg="4">
                     <b-form-file placeholder="Choose a file or drop it here..." drop-placeholder="Drop file here..." :state="errors[0] ? false : (validate ? true : null)" @input="validate" v-model="selectedFile"></b-form-file>
                 </b-form-group>
             </validation-provider>
 
-            <b-button type="submit" variant="success">{{ submitButtonName }}</b-button>
+            <b-button type="submit" variant="success">Update</b-button>
             <b-button variant="light" @click="closeModal">Cancel</b-button>
         </b-form>
     </ValidationObserver>
-</b-modal>
+</b-jumbotron>
 </template>
 
 <script>
@@ -112,19 +112,6 @@ export default {
             }],
             productInfo: null
         };
-    },
-    props: {
-        title: {
-            type: String,
-            required: true
-        },
-        submitButtonName: {
-            type: String,
-            default: "Submit"
-        },
-        method: {
-            type: Function
-        }
     },
     methods: {
         onSubmit() {

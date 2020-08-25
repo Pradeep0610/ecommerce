@@ -8,35 +8,44 @@
     </b-row>
 
     <AddProduct title="Add a new Product" submitButtonName="Add Product"></AddProduct>
-    <UpdateProduct title="Update Product" submitButtonName="Update Product"></UpdateProduct>
     <AddCategory></AddCategory>
     <AddOwner></AddOwner>
 
     <div>
         <b-row>
             <b-col class="mt-5" xl="3" lg="2" md="3" sm="6" v-for="product in products" :key="product._id">
-                <div>
-                    <b-img :src="'http://localhost:3000/'+product.photo" fluid rounded></b-img>
-                </div>
-                <div>
-                    <span class="font-weight-bold">{{ product.title }}</span>
-                </div>
-                <div class="a-row">
-                    <a href="#">
-                        <b-icon icon="star"></b-icon>
-                        <b-icon icon="star"></b-icon>
-                        <b-icon icon="star"></b-icon>
-                        <b-icon icon="star"></b-icon>
-                        <b-icon icon="star"></b-icon>
-                    </a>
-                    <span>
-                        &nbsp;
-                        <b-icon icon="chevron-down" scale="0.5"></b-icon>1732
-                    </span>
-                </div>
-                <div>
-                    <span>Rs. {{ product.price }}</span>
-                </div>
+                <b-card>
+                    <b-link :to="`/products/${product._id}`">
+                        <b-img :src="'http://localhost:3000/'+product.photo" fluid rounded></b-img>
+                        <div>
+                            <span class="font-weight-bold">{{ product.title }}</span>
+                        </div>
+                        <div class="a-row">
+                            <a href="#">
+                                <b-icon icon="star"></b-icon>
+                                <b-icon icon="star"></b-icon>
+                                <b-icon icon="star"></b-icon>
+                                <b-icon icon="star"></b-icon>
+                                <b-icon icon="star"></b-icon>
+                            </a>
+                            <span>
+                                &nbsp;
+                                <b-icon icon="chevron-down" scale="0.5"></b-icon>1732
+                            </span>
+                        </div>
+                        <div>
+                            <span>Rs. {{ product.price }}</span>
+                        </div>
+                        <b-row>
+                            <b-col class="pb-2">
+                                <b-button :to="`/products/${product._id}`" size="sm" variant="success">Update</b-button>
+                            </b-col>
+                            <b-col class="pb-2">
+                                <b-button size="sm" variant="danger">Delete</b-button>
+                            </b-col>
+                        </b-row>
+                    </b-link>
+                </b-card>
             </b-col>
         </b-row>
     </div>
@@ -65,10 +74,6 @@ export default {
                 {
                     modalID: "add-owner-modal",
                     buttonName: "Add a new owner"
-                },
-                {
-                    modalID: "update-product-modal",
-                    buttonName: "Update a Product"
                 }
             ]
         };
@@ -78,6 +83,11 @@ export default {
         AddCategory,
         AddOwner,
         UpdateProduct
+    },
+    methods: {
+        showProductInfo(productID) {
+            this.$router.push(`/products/${productID}`);
+        }
     },
     mounted() {
         axios

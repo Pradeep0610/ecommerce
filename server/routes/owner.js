@@ -41,4 +41,20 @@ router.get('/owners', async (req, res) => {
     }
 })
 
+//GET single owner
+router.get('/owners/:id', async (req, res) => {
+    try {
+        let owner = await Owner.findOne({ _id: req.params.id })
+        res.json({
+            success: true,
+            owner: owner
+        })
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message
+        })
+    }
+})
+
 module.exports = router
