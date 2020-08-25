@@ -2,24 +2,19 @@
 <b-container>
     <h1>All Products</h1>
     <b-row>
-        <b-col class="pb-2">
-            <b-button pill class="pb-2" @click="$bvModal.show('add-product-modal')" variant="dark">Add a new product</b-button>
-        </b-col>
-        <b-col class="pb-2">
-            <b-button pill class="pb-2" @click="$bvModal.show('add-category-modal')" variant="dark">Add a new category</b-button>
-        </b-col>
-        <b-col class="pb-2">
-            <b-button pill class="pb-2" @click="$bvModal.show('add-owner-modal')" variant="dark">Add a new owner</b-button>
+        <b-col class="pb-2 mt-3" v-for="modal in modalProps" :key="modal.modalID">
+            <b-button pill class="pb-2" @click="$bvModal.show(modal.modalID)" variant="dark">{{ modal.buttonName }}</b-button>
         </b-col>
     </b-row>
 
-    <AddProduct></AddProduct>
+    <AddProduct title="Add a new Product" submitButtonName="Add Product"></AddProduct>
+    <UpdateProduct title="Update Product" submitButtonName="Update Product"></UpdateProduct>
     <AddCategory></AddCategory>
     <AddOwner></AddOwner>
 
-    <div class="mt-4">
+    <div>
         <b-row>
-            <b-col xl="2" lg="2" md="3" sm="6" v-for="product in products" :key="product._id">
+            <b-col class="mt-5" xl="3" lg="2" md="3" sm="6" v-for="product in products" :key="product._id">
                 <div>
                     <b-img :src="'http://localhost:3000/'+product.photo" fluid rounded></b-img>
                 </div>
@@ -53,17 +48,36 @@ import axios from "axios";
 import AddProduct from "../components/AddNewProductModal";
 import AddCategory from "../components/AddNewCategory";
 import AddOwner from "../components/AddNewOwnerModal";
+import UpdateProduct from "../components/UpdateProduct";
 export default {
     name: "Product",
     data() {
         return {
-            products: []
+            products: [],
+            modalProps: [{
+                    modalID: "add-product-modal",
+                    buttonName: "Add a new Product"
+                },
+                {
+                    modalID: "add-category-modal",
+                    buttonName: "Add a new Category"
+                },
+                {
+                    modalID: "add-owner-modal",
+                    buttonName: "Add a new owner"
+                },
+                {
+                    modalID: "update-product-modal",
+                    buttonName: "Update a Product"
+                }
+            ]
         };
     },
     components: {
         AddProduct,
         AddCategory,
-        AddOwner
+        AddOwner,
+        UpdateProduct
     },
     mounted() {
         axios
