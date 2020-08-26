@@ -38,7 +38,7 @@
                         </div>
                         <b-row>
                             <b-col class="pb-2">
-                                <b-button :to="`/products/${product._id}`" size="sm" variant="success">Update</b-button>
+                                <b-button :to="`/products/product-edit/${product._id}`" size="sm" variant="success">Update</b-button>
                             </b-col>
                             <b-col class="pb-2">
                                 <b-button size="sm" variant="danger">Delete</b-button>
