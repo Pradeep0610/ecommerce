@@ -51,28 +51,28 @@
                                 <validation-provider name="Category" rules="required" v-slot="{ valid, errors }">
                                     <b-form-group label="Category" label-for="category-input" invalid-feedback="Category is required">
                                         <b-form-select v-model="product.categoryID" :state="errors[0] ? false : (valid ? true : null)" id="category-input">
-                                            <b-form-select-option v-for="category in categories" :key="category._id" :value="product.categoryID">{{ category.text }}</b-form-select-option>
+                                            <b-form-select-option v-for="category in categories" :key="category._id" :value="category._id">{{ category.text }}</b-form-select-option>
                                         </b-form-select>
                                     </b-form-group>
                                 </validation-provider>
                                 <validation-provider name="Owner" rules="required" v-slot="{ valid, errors }">
                                     <b-form-group label="Owner" label-for="owner-input" invalid-feedback="Owner is required">
                                         <b-form-select v-model="product.ownerID" :state="errors[0] ? false : (valid ? true : null)" id="owner-input">
-                                            <b-form-select-option v-for="owner in owners" :key="owner._id" :value="product.ownerID">{{ owner.name }}</b-form-select-option>
+                                            <b-form-select-option v-for="owner in owners" :key="owner._id" :value="owner._id">{{ owner.name }}</b-form-select-option>
                                         </b-form-select>
                                     </b-form-group>
                                 </validation-provider>
                                 <validation-provider name="Description" rules="required" v-slot="{ valid, errors }">
                                     <b-form-group label="Description" label-for="description-input" invalid-feedback="Description is required">
-                                        <b-form-textarea id="description-input" size="default" :state="errors[0] ? false : (valid ? true : null)" v-model="product.description"></b-form-textarea>
+                                        <b-form-textarea id="description-input" :state="errors[0] ? false : (valid ? true : null)" v-model="product.description"></b-form-textarea>
                                     </b-form-group>
                                 </validation-provider>
                             </div>
                         </vs-col>
                     </vs-row>
                     <vs-row vs-type="flex" vs-w="12" vs-justify="flex-end" class="my-2">
-                        <vs-button class="mr-2" size="large" button="submit">Save Changes</vs-button>
-                        <vs-button size="large" type="border" color="dark">Reset</vs-button>
+                        <b-button variant="primary" type="submit" class="mr-2">Save changes</b-button>
+                        <b-button variant="outline-warning" type="reset">Reset</b-button>
                     </vs-row>
                 </b-form>
             </ValidationObserver>
@@ -115,7 +115,7 @@ export default {
     },
     methods: {
         onSubmit() {
-            alert("Form submitted!");
+            alert("Form Submitted!");
         }
     },
     mounted() {
