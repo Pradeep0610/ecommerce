@@ -12,7 +12,7 @@
     <AddOwner></AddOwner>
 
     <div>
-        <b-row align-h="stretch">
+        <b-row>
             <b-col class="mt-5" xl="3" lg="2" md="3" sm="6" align-v="center" v-for="product in products" :key="product._id">
                 <b-card>
                     <b-link :to="`/products/${product._id}`">

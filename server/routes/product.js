@@ -80,7 +80,9 @@ router.put('/products/:id', upload.single('photo'), async (req, res) => {
                     title: req.body.title,
                     price: req.body.price,
                     category: req.body.categoryID,
-                    photo: req.file.path,
+
+                    //Enable during production-- req.file.location
+                    //photo: req.file.path,
                     description: req.body.description,
                     owner: req.body.ownerID
                 }

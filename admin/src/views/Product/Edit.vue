@@ -115,7 +115,26 @@ export default {
     },
     methods: {
         onSubmit() {
-            alert("Form Submitted!");
+            let data = new FormData();
+            data.append("title", this.product.title);
+            data.append("price", this.product.price);
+            data.append("stockQuantity", this.product.stockQuantity);
+            data.append("description", this.product.description);
+            data.append("categoryID", this.product.categoryID);
+            data.append("ownerID", this.product.ownerID);
+            data.append("photo", this.product.photo);
+            console.log(this.product.photo);
+            axios
+                .put(
+                    `http://localhost:3000/api/products/${this.$route.params.id}`,
+                    data
+                )
+                .then(response => {
+                    console.log(response.data.updatedProduct);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                });
         }
     },
     mounted() {
