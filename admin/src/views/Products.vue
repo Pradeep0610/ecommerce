@@ -1,5 +1,5 @@
 <template>
-<b-container>
+<div class="container-fluid">
     <h1>All Products</h1>
     <b-row>
         <b-col class="pb-2 mt-3" v-for="modal in modalProps" :key="modal.modalID">
@@ -12,10 +12,15 @@
     <AddOwner></AddOwner>
 
     <div>
-        <b-row>
-            <b-col class="mt-5" xl="3" lg="2" md="3" sm="6" align-v="center" v-for="product in products" :key="product._id">
-                <b-card>
-                    <b-link :to="`/products/${product._id}`">
+        <vs-row class="match-height" vs-w="12">
+            <vs-col v-for="product in products" :key="product._id" vs-lg="4" vs-md="6" vs-sm="12">
+                <vs-card fixed-height></vs-card>
+            </vs-col>
+        </vs-row>
+    </div>
+</div>
+
+<!-- <b-link :to="`/products/${product._id}`">
                         <b-img :src="'http://localhost:3000/'+product.photo" fluid rounded></b-img>
                         <div>
                             <span class="font-weight-bold">{{ product.title }}</span>
@@ -44,12 +49,7 @@
                                 <b-button size="sm" variant="danger">Delete</b-button>
                             </b-col>
                         </b-row>
-                    </b-link>
-                </b-card>
-            </b-col>
-        </b-row>
-    </div>
-</b-container>
+  </b-link>-->
 </template>
 
 <script>
@@ -99,3 +99,9 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+.container-fluid {
+    position: relative !important;
+}
+</style>
