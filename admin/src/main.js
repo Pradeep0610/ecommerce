@@ -3,12 +3,14 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
+import InstantSearch from 'vue-instantsearch'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import Vuesax from 'vuesax'
 import '../public/css/app.css'
 import 'vuesax/dist/vuesax.css' //Vuesax styles
 import 'material-icons/iconfont/material-icons.css'
 
+Vue.use(InstantSearch)
 Vue.use(Vuesax, {
   // options here
 
