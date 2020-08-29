@@ -1,0 +1,46 @@
+.vs-navbar {
+    height: 60px;
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    background-color: #fff !important;
+}
+
+.vs-navbar-wrapper {
+    width: calc(100% - 80px);
+    position: fixed !important;
+    z-index: 41000;
+    height: 103px;
+}
+
+@media (min-width: 577px) {
+    .navbar-floating .vs-navbar-wrapper {
+        padding: 1.3rem 2.2rem 2.2rem;
+    }
+}
+
+@media (min-width: 1201px) {
+    .main-vertical .vs-navbar-wrapper {
+        width: calc(100% - 260px);
+    }
+}
+
+[dir=ltr] .vx-navbar-wrapper {
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(44%, hsla(0, 0%, 97.3%, .95)), color-stop(73%, hsla(0, 0%, 97.3%, .46)), to(hsla(0, 0%, 100%, 0)));
+}
+
+.vs-sidebar--background {
+    background: rgba(0, 0, 0, .2);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    /* z-index: 20000; */
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    opacity: 1;
+}
+
+@media (max-width: 1200px) {
+    .vs-content-sidebar {
+        display: none;
+    }
+}
