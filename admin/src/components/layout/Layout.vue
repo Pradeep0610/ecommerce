@@ -2,17 +2,18 @@
 <div class="layout--main main-vertical navbar-floating">
     <sidebar></sidebar>
     <div id="content-area" class="content-area-reduced" ref="contentArea">
-        <div class="content-overlay">
-            <div class="relative">
-                <div class="vs-navbar-wrapper navbar-default">
-                    <Navbar></Navbar>
-                </div>
-                <div class="content-wrapper">
-                    <div class="router-view">
-                        <div class="router-content">
-                            <div class="router-header flex flex-wrap items-center mb-6"></div>
-                            <div class="content-area__content">Window Width: {{ windowWidth}}</div>
-                        </div>
+        <div id="content-overlay"></div>
+        <div class="relative">
+            <div class="vs-navbar-wrapper navbar-default">
+                <Navbar></Navbar>
+            </div>
+        </div>
+        <div class="content-wrapper">
+            <div class="router-view">
+                <div class="router-content">
+                    <div class="router-header flex flex-wrap items-center mb-6"></div>
+                    <div class="content-area__content">
+                        <router-view></router-view>
                     </div>
                 </div>
             </div>

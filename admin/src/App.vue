@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import "bootstrap/dist/css/bootstrap.css";
+import "../public/css/app.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import Layout from "@/components/layout/Layout";
 export default {
@@ -34,10 +34,6 @@ export default {
     color: #42b983;
 }
 
-.vs-sidebar.vs-sidebar-parent {
-    position: fixed !important;
-}
-
 .flex {
     display: flex !important;
 }
@@ -52,18 +48,6 @@ export default {
     flex-grow: 1 !important;
 }
 
-.items-center {
-    align-items: center !important;
-}
-
-.justify-center {
-    justify-content: center;
-}
-
-.justify-between {
-    justify-content: space-between !important;
-}
-
 .truncate {
     overflow: hidden !important;
     text-overflow: ellipsis !important;
@@ -72,10 +56,6 @@ export default {
 
 .text-sm {
     font-size: 0.875rem !important;
-}
-
-.font-semibold {
-    font-weight: 600 !important;
 }
 
 .grid-view-item .grid-view-img {
@@ -91,9 +71,5 @@ export default {
 
 .cursor-pointer {
     cursor: pointer !important;
-}
-
-.w-full {
-    width: 100% !important;
 }
 </style>

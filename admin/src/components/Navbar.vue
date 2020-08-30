@@ -1,5 +1,5 @@
 <template>
-<vs-navbar ref="navbar">
+<vs-navbar ref="navbar" class="navbar-skelton navbar-custom" color="#fff">
     <div slot="title">
         <vs-navbar-title>E-Commerce</vs-navbar-title>
     </div>
