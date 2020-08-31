@@ -8,22 +8,17 @@
 ==========================================================================================*/
 
 
-.vx-card {
+.vx-card{
     width: 100%;
     background: #fff;
     border-radius: .5rem;
     display: block;
-    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, .1);
+    box-shadow: 0px 4px 25px 0px rgba(0,0,0,.1);
     position: relative;
     transition: all .3s ease-in-out;
 
-    &.no-shadow {
-        box-shadow: none;
-    }
-
-    &.card-border {
-        border: 1px solid #e4e4e4;
-    }
+    &.no-shadow { box-shadow: none; }
+    &.card-border { border: 1px solid #e4e4e4;  }
 
     .vx-card__header {
         display: flex;
@@ -31,9 +26,8 @@
         flex-wrap: wrap;
         justify-content: space-between;
         padding: 1.5rem 1.5rem 0;
-
         .vx-card__title {
-            h4+h6 {
+            h4 + h6 {
                 margin-top: .3rem;
             }
 
@@ -41,7 +35,6 @@
                 font-weight: 400;
             }
         }
-
         .vx-card__actions {
             .vx-card__action-buttons {
                 display: flex;
@@ -50,21 +43,19 @@
                     margin-left: .5rem;
                 }
             }
-
             svg {
                 transition: all .25s ease-out;
                 height: 1rem;
                 width: 1rem;
                 cursor: pointer;
             }
-
-            .rotate180>svg {
+            .rotate180 > svg{
                 transform: rotate(180deg) !important;
             }
         }
     }
 
-    img.card-img-top {
+    img.card-img-top{
         border-top-left-radius: .5rem;
         border-top-right-radius: .5rem;
     }
@@ -89,12 +80,12 @@
             left: 0;
             padding: 1.25rem;
 
-            >* {
+            > * {
                 position: relative;
                 z-index: 1;
             }
 
-            &::after {
+            &::after{
                 position: absolute;
                 content: "";
                 top: 0;
@@ -103,7 +94,7 @@
                 margin: auto;
                 height: 100%;
                 width: 100%;
-                background: rgba(0, 0, 0, .60);
+                background: rgba(0,0,0,.60);
                 z-index: 0;
             }
         }
@@ -111,15 +102,10 @@
         .vx-card__body {
             padding: 1.5rem;
 
-            img+.vx-card__title>h4 {
-                margin-top: 1.5rem
-            }
+            img + .vx-card__title > h4 { margin-top: 1.5rem }
 
         }
-
-        img {
-            display: block
-        }
+        img { display: block }
     }
 
     .vx-card__code-container {
