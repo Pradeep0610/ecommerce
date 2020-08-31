@@ -1,24 +1,29 @@
 import Vue from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
-import router from './router'
+
+// Algolia - Instant Search
 import InstantSearch from 'vue-instantsearch'
-import Vuesax from 'vuesax'
-import 'vuesax/dist/vuesax.css' //Vuesax styles
-import 'material-icons/iconfont/material-icons.css'
-import FeatherIcon from './components/FeatherIcon.vue'
-
-Vue.component(FeatherIcon.name, FeatherIcon)
-
 Vue.use(InstantSearch)
-Vue.use(Vuesax, {
-  // options here
 
-})
+// Vuesax Component Framework
+import Vuesax from 'vuesax'
+import 'material-icons/iconfont/material-icons.css' //Material Icons
+import 'vuesax/dist/vuesax.css'; // Vuesax
+Vue.use(Vuesax)
+
+// Globally Registered Components
+import './globalComponents.js'
+
+// Vue Router
+import router from './router'
 
 // Vuex Store
 import store from './store/index'
 
+// VeeValidate
+import { ValidationProvider, extend } from 'vee-validate';
+Vue.component('ValidationProvider', ValidationProvider);
 
 // Feather font icon
 require('./assets/css/iconfont.css')
