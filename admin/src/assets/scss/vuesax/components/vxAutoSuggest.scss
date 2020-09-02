@@ -1,19 +1,9 @@
-/*=========================================================================================
-    File Name: vxAutoSuggest.scss
-    Description: Styles for vx-auto-suggest component. Imported in VxAutoSuggest.vue file
-    ----------------------------------------------------------------------------------------
-    Item Name: Vuesax Admin - VueJS Dashboard Admin Template
-      Author: Pixinvent
-    Author URL: http://www.themeforest.net/user/pixinvent
-==========================================================================================*/
-
-
 .vx-auto-suggest {
     position: relative;
 
-    .vs-input{
-        .vs-con-input{
-            .vs-inputx{
+    .vs-input {
+        .vs-con-input {
+            .vs-inputx {
                 z-index: 10;
             }
         }
@@ -34,9 +24,9 @@
     }
 }
 
-.navbar-sticky{
+.navbar-sticky {
     .vx-auto-suggest {
-        .auto-suggest-suggestions-list{
+        .auto-suggest-suggestions-list {
             margin-left: .5rem;
         }
     }
