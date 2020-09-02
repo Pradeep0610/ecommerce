@@ -1,6 +1,6 @@
 <template>
 <div class="layout--main" :class="[navbarClasses, footerClasses, {'app-page': isAppPage}]">
-    <vx-sidebar :sidebarItems="sidebarItems" :logo="require('@/assets/images/logo/logo.png')" title="e-Filing" parent=".layout--main" />
+    <vx-sidebar :sidebarItems="sidebarItems" title="E-Commerce" parent=".layout--main" />
 
     <div id="content-area" :class="[contentAreaClass, {'show-overlay': bodyOverlay}]">
         <div id="content-overlay"></div>

@@ -57,6 +57,9 @@ module.exports = {
     prefix: '',
     important: false,
     separator: ':',
+    future: {
+        removeDeprecatedGapUtilities: true,
+    },
     theme: {
         /*
     |-----------------------------------------------------------------------------

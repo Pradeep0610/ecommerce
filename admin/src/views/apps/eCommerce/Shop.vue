@@ -28,12 +28,6 @@
                                 <vs-select-item v-for="item in items" :key="item.value" :value="item.value" :text="item.label" />
                             </vs-select>
                         </ais-sort-by>
-
-                        <!-- ITEM VIEW - GRID/LIST -->
-                        <div>
-                            <feather-icon icon="GridIcon" @click="currentItemView='item-grid-view'" class="p-2 shadow-drop rounded-lg d-theme-dark-bg cursor-pointer" :svgClasses="{'text-primary stroke-current': currentItemView == 'item-grid-view'}" />
-                            <feather-icon icon="ListIcon" @click="currentItemView='item-list-view'" class="p-2 ml-4 shadow-drop rounded-lg d-theme-dark-bg cursor-pointer hidden sm:inline-flex" :svgClasses="{'text-primary stroke-current': currentItemView == 'item-list-view'}" />
-                        </div>
                     </div>
                 </div>
             </div>
@@ -139,12 +133,12 @@
                             <span :hidden="!isSearchStalled">Loading...</span>
 
                             <!-- SEARCH ICON -->
-                            <div slot="submit-icon" class="absolute pin-t pin-r py-4 px-6" v-show="!currentRefinement">
+                            <div slot="submit-icon" class="absolute top-0 right-0 py-4 px-6" v-show="!currentRefinement">
                                 <feather-icon icon="SearchIcon" svgClasses="h-6 w-6" />
                             </div>
 
                             <!-- CLEAR INPUT ICON -->
-                            <div slot="reset-icon" class="absolute pin-t pin-r py-4 px-6" v-show="currentRefinement">
+                            <div slot="reset-icon" class="absolute top-0 right-0 py-4 px-6" v-show="currentRefinement">
                                 <feather-icon icon="XIcon" svgClasses="h-6 w-6 cursor-pointer" @click="refine('')" />
                             </div>
                         </div>
@@ -154,55 +148,52 @@
                 <!-- SEARCH RESULT -->
                 <ais-hits>
                     <div slot-scope="{ items }">
-                        <!-- GRID VIEW -->
-                        <template v-if="currentItemView == 'item-grid-view'">
-                            <div class="items-grid-view vx-row match-height">
-                                <div class="vx-col lg:w-1/3 sm:w-1/2 w-full" v-for="item in items" :key="item.objectID">
-                                    <item-grid-view :item="item">
-                                        <!-- SLOT: ACTION BUTTONS -->
-                                        <template slot="action-buttons">
-                                            <div class="flex flex-wrap">
-                                                <!-- PRIMARY BUTTON: ADD TO WISH LIST -->
-                                                <div class="item-view-primary-action-btn p-3 flex flex-grow items-center justify-center cursor-pointer" @click="toggleItemInWishList(item)">
-                                                    <feather-icon icon="HeartIcon" :svgClasses="[{'text-danger fill-current' : isInWishList(item.objectID)}, 'h-4 w-4']" />
-
-                                                    <span class="text-sm font-semibold ml-2">WISHLIST</span>
-                                                </div>
-
-                                                <!-- SECONDARY BUTTON: ADD-TO/VIEW-IN CART -->
-                                                <div class="item-view-secondary-action-btn bg-primary p-3 flex flex-grow items-center justify-center text-white cursor-pointer" @click="cartButtonClicked(item)">
-                                                    <feather-icon icon="ShoppingBagIcon" svgClasses="h-4 w-4" />
-
-                                                    <span class="text-sm font-semibold ml-2" v-if="isInCart(item.objectID)">VIEW IN CART</span>
-                                                    <span class="text-sm font-semibold ml-2" v-else>ADD TO CART</span>
-                                                </div>
-                                            </div>
-                                        </template>
-                                    </item-grid-view>
-                                </div>
-                            </div>
-                        </template>
-
-                        <!-- LIST VIEW -->
-                        <template v-else>
-                            <div class="items-list-view" v-for="item in items" :key="item.objectID">
-                                <item-list-view :item="item">
-                                    <!-- SLOT: ACTION BUTTONS -->
-                                    <template slot="action-buttons">
-                                        <div class="item-view-primary-action-btn p-3 rounded-lg flex flex-grow items-center justify-center cursor-pointer mb-3" @click="toggleItemInWishList(item)">
-                                            <feather-icon icon="HeartIcon" :svgClasses="[{'text-danger fill-current' : isInWishList(item.objectID)}, 'h-4 w-4']" />
-                                            <span class="text-sm font-semibold ml-2">WISHLIST</span>
+                        <div class="items-grid-view vx-row match-height">
+                            <div class="vx-col lg:w-1/3 sm:w-1/2 w-full" v-for="item in items" :key="item.objectID">
+                                <vx-card class="grid-view-item mb-base overflow-hidden">
+                                    <template slot="no-body">
+                                        <!-- ITEM IMAGE -->
+                                        <div class="item-img-container bg-white h-64 flex items-center justify-center mb-4">
+                                            <img :src="item.image" :alt="item.name" class="grid-view-img px-4" />
                                         </div>
-                                        <div class="item-view-secondary-action-btn bg-primary p-3 rounded-lg flex flex-grow items-center justify-center text-white cursor-pointer" @click="cartButtonClicked(item)">
-                                            <feather-icon icon="ShoppingBagIcon" svgClasses="h-4 w-4" />
+                                        <div class="item-details px-4">
+                                            <!-- RATING & PRICE -->
+                                            <div class="flex justify-between items-center">
+                                                <div class="bg-primary flex text-white py-1 px-2 rounded">
+                                                    <span class="text-sm mr-2">{{ item.rating }}</span>
+                                                    <feather-icon icon="StarIcon" svgClasses="h-4 w-4" />
+                                                </div>
+                                                <h6 class="font-bold">${{ item.price }}</h6>
+                                            </div>
 
-                                            <span class="text-sm font-semibold ml-2" v-if="isInCart(item.objectID)">VIEW IN CART</span>
-                                            <span class="text-sm font-semibold ml-2" v-else>ADD TO CART</span>
+                                            <!-- TITLE & DESCRIPTION -->
+                                            <div class="my-4">
+                                                <h6 class="truncate font-semibold mb-1">{{ item.name }}</h6>
+                                                <p class="item-description truncate text-sm">{{ item.description }}</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- SLOT: ACTION BUTTONS -->
+                                        <div class="flex flex-wrap">
+                                            <!-- PRIMARY BUTTON: ADD TO WISH LIST -->
+                                            <div class="item-view-primary-action-btn p-3 flex flex-grow items-center justify-center cursor-pointer" @click="toggleItemInWishList(item)">
+                                                <feather-icon icon="HeartIcon" :svgClasses="[{'text-danger fill-current' : isInWishList(item.objectID)}, 'h-4 w-4']" />
+
+                                                <span class="text-sm font-semibold ml-2">WISHLIST</span>
+                                            </div>
+
+                                            <!-- SECONDARY BUTTON: ADD-TO/VIEW-IN CART -->
+                                            <div class="item-view-secondary-action-btn bg-primary p-3 flex flex-grow items-center justify-center text-white cursor-pointer" @click="cartButtonClicked(item)">
+                                                <feather-icon icon="ShoppingBagIcon" svgClasses="h-4 w-4" />
+
+                                                <span class="text-sm font-semibold ml-2" v-if="isInCart(item.objectID)">VIEW IN CART</span>
+                                                <span class="text-sm font-semibold ml-2" v-else>ADD TO CART</span>
+                                            </div>
                                         </div>
                                     </template>
-                                </item-list-view>
+                                </vx-card>
                             </div>
-                        </template>
+                        </div>
                     </div>
                 </ais-hits>
 
@@ -229,9 +220,6 @@
 import algoliasearch from "algoliasearch/lite";
 
 export default {
-    components: {
-        ItemGridView: () => import("./components/ItemGridView.vue")
-    },
     data() {
         return {
             searchClient: algoliasearch(
@@ -242,7 +230,6 @@ export default {
             isFilterSidebarActive: true,
             clickNotClose: true,
             windowWidth: window.innerWidth,
-            currentItemView: "item-grid-view",
             numericItems: [{
                     label: "All"
                 },
@@ -365,16 +352,6 @@ export default {
     }
 }
 
-.theme-dark {
-    #algolia-instant-search-demo {
-        #algolia-content-container {
-            .vs-sidebar {
-                background-color: #10163a;
-            }
-        }
-    }
-}
-
 @media (min-width: 992px) {
     .vs-sidebar-rounded {
         .vs-sidebar {
@@ -392,6 +369,24 @@ export default {
         .vs-sidebar {
             position: absolute !important;
             float: none !important;
+        }
+    }
+}
+
+.grid-view-item {
+    .grid-view-img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        transition: 0.35s;
+    }
+
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.25);
+
+        .grid-view-img {
+            opacity: 0.9;
         }
     }
 }

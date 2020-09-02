@@ -20,6 +20,22 @@ const routes = [
           rule: 'admin'
         }
       },
+
+      //Application Routes
+      {
+        path: '/apps/eCommerce/shop',
+        name: 'Shop',
+        component: () => import('../views/apps/eCommerce/Shop.vue'),
+        meta: {
+          breadcrumb: [
+            { title: 'Home', url: '/' },
+            { title: 'eCommerce' },
+            { title: 'Shop', active: true },
+          ],
+          pageTitle: 'Shop',
+          rule: 'editor'
+        }
+      },
     ]
   }
 ]
