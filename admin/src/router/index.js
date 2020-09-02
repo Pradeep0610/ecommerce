@@ -36,6 +36,20 @@ const routes = [
           rule: 'editor'
         }
       },
+      {
+        path: '/apps/eCommerce/checkout',
+        name: 'Checkout',
+        component: () => import('../views/apps/eCommerce/Checkout.vue'),
+        meta: {
+          breadcrumb: [
+            { title: 'Home', url: '/' },
+            { title: 'eCommerce' },
+            { title: 'Checkout', active: true },
+          ],
+          pageTitle: 'Checkout',
+          rule: 'editor'
+        }
+      }
     ]
   }
 ]
