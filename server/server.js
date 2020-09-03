@@ -2,15 +2,13 @@ const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const dotenv = require('dotenv')
+const { DB } = require('./config')
 const cors = require('cors')
-
-dotenv.config()
 
 const app = express()
 
 mongoose.connect(
-    process.env.DATABASE,
+    DB,
     { useNewUrlParser: true, useUnifiedTopology: true },
     err => {
         if (err) {
@@ -23,9 +21,9 @@ mongoose.connect(
 
 //Middlewares
 app.use(cors())
-app.use('/assets', express.static('assets'))  //Make folder public
 app.use(morgan('dev'))
 app.use(bodyParser.json())
+app.use('/assets', express.static('assets'))  //Make folder public
 app.use(bodyParser.urlencoded({ extended: false }))
 
 //require APIs

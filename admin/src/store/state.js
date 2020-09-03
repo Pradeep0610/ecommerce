@@ -23,7 +23,7 @@ const state = {
   themePrimaryColor: colors.primary,
 
   starredPages: navbarSearchAndPinList.data.filter((page) => page.highlightAction),
-  userRole: null,
+  userRole: 'editor',
 }
 
 export default state

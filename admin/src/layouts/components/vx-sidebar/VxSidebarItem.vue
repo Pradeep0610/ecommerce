@@ -80,6 +80,7 @@ export default {
         canSee() {
             this.$acl.check(this.$store.state.userRole);
             if (this.to) {
+                console.log(this.$acl);
                 return this.$acl.check(this.$router.match(this.to).meta.rule);
             }
             return true;

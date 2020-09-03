@@ -1,3 +1,6 @@
 module.exports = {
-    publicPath: '/admin/'
+    publicPath:
+        process.env.NODE_ENV === 'production'
+            ? '/ecommerce_admin_dashboard/'
+            : '/'
 }

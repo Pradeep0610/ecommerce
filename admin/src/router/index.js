@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '',
+    path: process.env.NODE_ENV === 'production' ? '/ecommerce_admin_dashboard/' : '',
     component: () => import('../layouts/main/Main.vue'),
     children: [
       {
