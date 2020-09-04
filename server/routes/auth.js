@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
+const { SECRET } = require('../config')
 const router = require('express').Router()
-const { login } = require('../utils/auth')
+const { serializeUser } = require('../utils/auth')
 const verifyToken = require('../middlewares/verify-token')
 
 
@@ -20,9 +21,11 @@ router.post('/auth/signup', async (req, res) => {
             newUser.username = req.body.username
             newUser.password = req.body.password
             await newUser.save()
+            let token = jwt.sign(serializeUser(newUser.toJSON()), SECRET, { expiresIn: 604800 })
 
             res.json({
                 success: true,
+                token: token,
                 message: "Successfully registered."
             })
         } catch (err) {
@@ -56,10 +59,24 @@ router.get('/auth/user', verifyToken, async (req, res) => {
 //Login Route
 router.post('/auth/login', async (req, res) => {
     try {
-        await login(req.body, res)
-
+        let foundUser = await User.findOne({ email: req.body.email })
+        if (!foundUser) {
+            res.status(403).json({
+                success: false,
+                message: "Login failed. Invalid credentials."
+            })
+        } else {
+            if (foundUser.comparePassword(req.body.password)) {
+                let token = jwt.sign(serializeUser(foundUser.toJSON()), SECRET, { expiresIn: 604800 })
+                res.json({ success: true, token: token })
+            } else {
+                res.status(403).json({
+                    success: false,
+                    message: 'Login failed. Invalid credentials'
+                })
+            }
+        }
     } catch (err) {
-        console.log(err)
         res.status(500).json({
             success: false,
             message: err.message

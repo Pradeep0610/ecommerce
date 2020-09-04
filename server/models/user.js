@@ -7,7 +7,6 @@ const UserSchema = new Schema({
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
     role: { type: String, default: 'user', enum: ["user", "admin", "superadmin"] },
-    username: { type: String, unique: true, required: true },
     address: { type: Schema.Types.ObjectId, ref: 'Address' }
 }, { timestamps: true })
 
@@ -33,9 +32,8 @@ UserSchema.pre("save", function (next) {
     }
 })
 
-UserSchema.methods.comparePassword = (password, next) => {
-    let user = this
-    return bcrypt.compareSync(password, user.password)
+UserSchema.methods.comparePassword = function (password) {
+    return bcrypt.compareSync(password, this.password)
 }
 
 module.exports = mongoose.model('User', UserSchema)
