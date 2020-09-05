@@ -1,0 +1,70 @@
+.vs-con-input {
+    .vs-inputx {
+        padding: .7rem;
+        font-size: 1rem;
+        border: 1px solid rgba(0, 0, 0, .2);
+    }
+
+    .vx-inputx:not(.input-rounded-full) {
+        border-radius: 5px;
+    }
+}
+
+.vs-input--input.normal {
+    padding: .7rem;
+    font-size: 1rem;
+}
+
+.vs-input--input.hasIcon {
+    padding: 0.7rem 1rem 0.7rem 3rem;
+
+    &.icon-after-input {
+        padding: 0.7rem 3rem 0.7rem 1rem;
+    }
+}
+
+.vs-input--placeholder.normal {
+    padding: .6rem;
+}
+
+.vs-input--input.large {
+    padding: 1rem;
+    font-size: 1.2rem;
+
+    &.hasIcon {
+        padding: 1rem 0.8rem 1rem 2.5rem;
+    }
+}
+
+.vs-input--placeholder.large {
+    padding: 1rem;
+}
+
+.vs-input--input.small {
+    padding: .4rem;
+    font-size: .8rem;
+}
+
+.vs-input--placeholder.small {
+    padding: .2rem .6rem;
+    font-size: .8rem;
+}
+
+.vs-input--input.large~.vs-input--icon {
+    top: 1rem;
+    left: 0.8rem;
+}
+
+.vs-input--icon {
+    top: 13px;
+
+    &.feather {
+        top: 10px;
+    }
+}
+
+.no-icon-border {
+    .vs-input--icon {
+        border: none;
+    }
+}

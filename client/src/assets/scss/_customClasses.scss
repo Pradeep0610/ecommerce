@@ -1,0 +1,23 @@
+.vx-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -1rem;
+    // overflow: hidden;
+    // @apply flex flex-wrap -mx-4;
+
+    &>.vx-col {
+        padding: 0 1rem;
+    }
+
+    &.match-height>.vx-col {
+        display: flex;
+    }
+
+    &.no-gutter {
+        margin: 0;
+
+        &>.vx-col {
+            padding: 0;
+        }
+    }
+}
